@@ -1,0 +1,45 @@
+<div class="content" role="main">
+  <br><br><br><br>
+  <div class="text-center h5">
+    Draft to your own whatsapp number
+  </div>
+  <br>
+
+  <form #f="ngForm" [formGroup]="phoneForm" (ngSubmit)="onSubmit(phoneForm)" (keyup.enter)="onSubmit(phoneForm)">
+    <ngx-intl-tel-input
+    [cssClass]="'custom'"
+    [preferredCountries]="[CountryISO.UnitedStates, CountryISO.UnitedKingdom]"
+    [enableAutoCountrySelect]="false"
+    [enablePlaceholder]="true"
+    [searchCountryFlag]="true"
+    [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+    [selectFirstCountry]="false"
+    [selectedCountryISO]="CountryISO.India"
+    [maxLength]="15"
+    [tooltipField]="TooltipLabel.Name"
+    [phoneValidation]="true"
+    name="phone"
+    formControlName="phone"></ngx-intl-tel-input>
+    <br><br>
+    <div class="text-center">
+      <button class="btn btn-success center" type="submit" [disabled]="!phoneForm.valid">Submit</button>
+    </div>
+  </form>
+
+  <ngx-spinner bdOpacity = 0.9 bdColor = "#333" size = "medium" color = "#c42e2e" type = "line-scale-pulse-out" [fullScreen] = "false">
+    <p style="color: white" > Loading... </p>
+  </ngx-spinner>
+  <br><br>
+  <div *ngIf="loaded">
+    <div class="text-center h5"> Tap on the Quote to forward it to Whatsapp </div>
+    <br>
+    <div class="container text-center" style="text-shadow: 2px 2px 5px black;text-decoration: underline;">
+      <a (click)="forwardQuote()">{{quote}}</a>
+    </div>
+    <br><br>
+
+    <div class="text-center">
+      <button class="btn btn-success center" (click)="findQuotes()">Next Quote</button>
+    </div>
+  </div>
+</div>
